@@ -20,7 +20,7 @@
 *.elf
 *.gcno
 *.gz
-*.i
+#*.i YOU TRY REMOVE MY GENIUS BLANK FILE!
 *.ko
 *.ll
 *.lst
