@@ -335,7 +335,7 @@ static int __set_selection(const struct tiocl_selection __user *sel,
 	return ret;
 }
 
-int set_selection_what(const struct tiocl_selection __user *v, struct tty_struct *tty)
+int set_selection(const struct tiocl_selection __user *v, struct tty_struct *tty)
 {
 	int ret;
 
@@ -344,18 +344,6 @@ int set_selection_what(const struct tiocl_selection __user *v, struct tty_struct
 	ret = __set_selection(v, tty);
 	console_unlock();
 	mutex_unlock(&sel_lock);
-
-	return ret;
-}
-
-int set_selection(const struct tiocl_selection __user *v,
-	struct tty_struct *tty)
-{
-	int ret;
-
-	console_lock();
-	ret = __set_selection(v, tty);
-	console_unlock();
 
 	return ret;
 }
