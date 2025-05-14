@@ -335,7 +335,7 @@ static int __set_selection(const struct tiocl_selection __user *sel,
 	return ret;
 }
 
-int set_selection(const struct tiocl_selection __user *v, struct tty_struct *tty)
+int set_selection_what(const struct tiocl_selection __user *v, struct tty_struct *tty)
 {
 	int ret;
 
