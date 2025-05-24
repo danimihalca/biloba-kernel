@@ -46,6 +46,10 @@
 #include "ged_ge.h"
 #include "ged_gpu_tuner.h"
 
+#ifdef GED_SKI_SUPPORT
+#include "ged_ski.h"
+#endif
+
 #define GED_DRIVER_DEVICE_NAME "ged"
 
 static GED_LOG_BUF_HANDLE ghLogBuf_GPU;
@@ -354,7 +358,6 @@ unlock_and_return:
  */
 static int ged_pdrv_probe(struct platform_device *pdev)
 {
-#ifdef CONFIG_MTK_GPU_OPP_STATS_SUPPORT
 	int ret;
 
 	ret = ged_dvfs_init_opp_cost();
@@ -364,9 +367,6 @@ static int ged_pdrv_probe(struct platform_device *pdev)
 	}
 
 	return ret;
-#else
-	return 0;
-#endif
 }
 
 static const struct of_device_id g_ged_of_match[] = {
@@ -428,6 +428,10 @@ static void ged_exit(void)
 	ged_log_buf_free(ghLogBuf_GPU);
 	ghLogBuf_GPU = 0;
 #endif /* GED_BUFFER_LOG_DISABLE */
+
+#ifdef GED_SKI_SUPPORT
+	ged_ski_exit();
+#endif
 
 	ged_gpu_tuner_exit();
 
@@ -520,6 +524,14 @@ static int ged_init(void)
 		GED_LOGE("ged: failed to init GPU Tuner!\n");
 		goto ERROR;
 	}
+
+#ifdef GED_SKI_SUPPORT
+	err = ged_ski_init();
+	if (unlikely(err != GED_OK)) {
+		GED_LOGE("ged: failed to init ski!\n");
+		goto ERROR;
+	}
+#endif
 
 #ifndef GED_BUFFER_LOG_DISABLE
 	ghLogBuf_GPU = ged_log_buf_alloc(512, 128 * 512,
