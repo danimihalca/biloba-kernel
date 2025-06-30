@@ -538,7 +538,7 @@
 };
 /* add goodix fingerprint end*/
 
-#include <biloba/cust.dtsi>
+#include <mediatek/biloba/cust.dtsi>
 #include "mediatek/cust_biloba_camera.dtsi"
 /*#include "mediatek/cust_mt6768_touch_1080x2160.dtsi"*/
 #include "mediatek/touchscreen_biloba.dtsi"
