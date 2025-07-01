@@ -11,6 +11,7 @@
 
 DRVGEN_PATH := drivers/misc/mediatek/dws/$(MTK_PLATFORM)
 DRVGEN_OUT := $(objtree)/arch/$(SRCARCH)/boot/dts/mediatek/biloba
+DRVGEN_OUT_SRC := $(srctree)/arch/$(SRCARCH)/boot/dts/mediatek/biloba
 DWS_FILE := $(srctree)/$(DRVGEN_PATH)/$(MTK_PROJECT).dws
 DRVGEN_TOOL := $(srctree)/tools/dct/DrvGen.py
 
@@ -19,4 +20,6 @@ drvgen: arch/arm64/boot/dts/mediatek/biloba
 arch/arm64/boot/dts/mediatek/biloba: $(DRVGEN_TOOL) $(DWS_FILE) $(DRVGEN_OUT)
 	echo 'Creating $(DRVGEN_OUT)' ;\
 	mkdir $(DRVGEN_OUT) ;\
+	echo 'Creating $(DRVGEN_OUT_SRC)' ;\
+	mkdir $(DRVGEN_OUT_SRC) ;\
 	$(python) $(DRVGEN_TOOL) $(DWS_FILE) $(DRVGEN_OUT) ;\
