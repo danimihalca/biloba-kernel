@@ -274,6 +274,9 @@ cmd_gzip = (cat $(filter-out FORCE,$^) | gzip -n -f -9 > $@) || \
 # ---------------------------------------------------------------------------
 DTC ?= $(objtree)/scripts/dtc/dtc
 
+# Silence warnings
+DTC_FLAGS += -q
+
 # Disable noisy checks by default
 ifeq ($(KBUILD_ENABLE_EXTRA_GCC_CHECKS),)
 DTC_FLAGS += -Wno-unit_address_vs_reg \
@@ -318,6 +321,9 @@ cmd_dtc = mkdir -p $(dir ${dtc-tmp}) ; \
 	cat $(depfile).pre.tmp $(depfile).dtc.tmp > $(depfile)
 
 $(obj)/%.dtb: $(src)/%.dts FORCE
+	$(call if_changed_dep,dtc)
+
+$(obj)/%.dtbo: $(src)/%.dts FORCE
 	$(call if_changed_dep,dtc)
 
 dtc-tmp = $(subst $(comma),_,$(dot-target).dts.tmp)
