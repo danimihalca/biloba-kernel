@@ -430,13 +430,13 @@ class GpioObj(ModuleObj):
                         regExp = '[_A-Z0-9:]*%s[_A-Z0-9:]*' %(item.upper())
                         pat = re.compile(regExp)
                         for i in range(0, GpioData._modNum):
-                            list = value.get_modeVec()
+                            list_a = value.get_modeVec()
                             mode_name = GpioData.get_modeName(key, i)
 
-                            if list[i] == '1':
+                            if list_a[i] == '1':
                                 if mode_name.find('//') != -1:
                                     mode_name = mode_name.split('//')[0]
-                            elif list[i] == '2':
+                            elif list_a[i] == '2':
                                 if mode_name.find('//') != -1:
                                     mode_name = mode_name.split('//')[1]
 
@@ -449,16 +449,16 @@ class GpioObj(ModuleObj):
                                 break
 
                     if not value.get_eintMode():
-                        list = value.get_modeVec()
+                        list_a = value.get_modeVec()
                         for i in range(0,GpioData._modNum):
                             mode_name = GpioData.get_modeName(key, i)
 
-                            if list[i] == '0':
+                            if list_a[i] == '0':
                                 continue
-                            elif list[i] == '1':
+                            elif list_a[i] == '1':
                                 if mode_name.find('//') != -1:
                                     mode_name = mode_name.split('//')[0]
-                            elif list[i] == '2':
+                            elif list_a[i] == '2':
                                 if mode_name.find('//') != -1:
                                     mode_name = mode_name.split('//')[1]
 
