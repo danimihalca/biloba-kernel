@@ -19,7 +19,7 @@ DRVGEN_TOOL := $(srctree)/tools/dct/DrvGen.py
 drvgen: arch/arm64/boot/dts/mediatek/biloba
 arch/arm64/boot/dts/mediatek/biloba: $(DRVGEN_TOOL) $(DWS_FILE) $(DRVGEN_OUT)
 	echo 'Creating $(DRVGEN_OUT)' ;\
-	mkdir $(DRVGEN_OUT) ;\
+	mkdir -p $(DRVGEN_OUT) ;\
 	echo 'Creating $(DRVGEN_OUT_SRC)' ;\
-	mkdir $(DRVGEN_OUT_SRC) ;\
+	mkdir -p $(DRVGEN_OUT_SRC) ;\
 	$(python) $(DRVGEN_TOOL) $(DWS_FILE) $(DRVGEN_OUT) ;\
