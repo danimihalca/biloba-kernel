@@ -16,4 +16,6 @@ DRVGEN_TOOL := $(srctree)/tools/dct/DrvGen.py
 
 .PHONY: drvgen
 drvgen: $(DRVGEN_TOOL) $(DWS_FILE) $(DRVGEN_OUT)
+	echo 'Removing $(DRVGEN_OUT)/*'
+	rm $(DRVGEN_OUT)/* ;\
 	$(python) $(DRVGEN_TOOL) $(DWS_FILE) $(DRVGEN_OUT) ;\
